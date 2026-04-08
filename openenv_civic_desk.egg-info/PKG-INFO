@@ -1,0 +1,14 @@
+Metadata-Version: 2.4
+Name: openenv-civic_desk
+Version: 1.0.0
+Summary: AI-Powered Civic Service Benchmarking Environment for OpenEnv
+Requires-Python: >=3.10
+Requires-Dist: openenv-core[core]>=0.2.1
+Requires-Dist: streamlit>=1.30.0
+Requires-Dist: plotly>=5.18.0
+Requires-Dist: pandas>=2.0.0
+Requires-Dist: huggingface-hub>=0.20.0
+Requires-Dist: requests>=2.28.0
+Provides-Extra: dev
+Requires-Dist: pytest>=8.0.0; extra == "dev"
+Requires-Dist: pytest-cov>=4.0.0; extra == "dev"

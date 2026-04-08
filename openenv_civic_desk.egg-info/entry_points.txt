@@ -1,0 +1,3 @@
+[console_scripts]
+benchmark = civic_desk.benchmark:run_benchmark
+server = civic_desk.server.app:main
