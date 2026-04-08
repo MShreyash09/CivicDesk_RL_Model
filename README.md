@@ -1,11 +1,9 @@
 ---
-title: Civic Desk
+title: Civic Desk Dispatcher
 emoji: 🏛️
-colorFrom: indigo
-colorTo: purple
-sdk: streamlit
-sdk_version: 1.32.2
-app_file: dashboard.py
+colorFrom: blue
+colorTo: green
+sdk: docker
 pinned: false
 ---
 
