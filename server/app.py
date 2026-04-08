@@ -36,20 +36,13 @@ async def health_check():
     return {"status": "online"}
 
 def main(host: str = "0.0.0.0", port: int = 8000):
-    """
-    Main entry point for the server. 
-    The validator looks for this specific function name.
-    """
-    # Priority: Environment variable "PORT" -> passed argument -> default 8000
-    env_port = os.environ.get("PORT")
-    final_port = int(env_port) if env_port else port
-    
+    import uvicorn
+    final_port = int(os.environ.get("PORT", port))
     uvicorn.run(app, host=host, port=final_port)
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description="Run the Civic Desk Environment Server")
-    parser.add_argument("--host", type=str, default="0.0.0.0", help="Host to bind the server to")
-    parser.add_argument("--port", type=int, default=8000, help="Port to bind the server to")
-    
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--port", type=int, default=8000)
     args = parser.parse_args()
-    main(host=args.host, port=args.port)
+    main(port=args.port)
