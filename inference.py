@@ -85,5 +85,5 @@ def main():
     # 5. EXACT STDOUT: [END]
     print(f"[END] success={success_str} steps={step-1} score={formatted_score} rewards={rewards_str}")
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
