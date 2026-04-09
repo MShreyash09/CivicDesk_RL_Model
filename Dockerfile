@@ -14,9 +14,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-# Force Hugging Face's port into the environment variables
 EXPOSE 7860
 ENV PORT=7860
 
-# Run the app (app.py will find the ENV PORT automatically)
-CMD ["python", "server/app.py"]
+# CMD ["python", "server/app.py"]
+CMD ["streamlit", "run", "dashboard.py", "--server.port", "7860", "--server.address", "0.0.0.0"]
