@@ -17,6 +17,18 @@ API_BASE_URL = os.getenv("API_BASE_URL", "https://router.huggingface.co/v1")
 MODEL_NAME = os.getenv("MODEL_NAME", "Qwen/Qwen2.5-72B-Instruct")
 API_KEY = os.getenv("HF_TOKEN") or os.getenv("API_KEY") or "dummy-key-for-validation"
 
+def state_normalizer(obs, llm_parsed):
+    """
+    Helper function for the dashboard to synchronize LLM 
+    perception with RL state observations.
+    """
+    # If obs is a dictionary, we ensure it's formatted for the RL agent
+    if isinstance(obs, dict):
+        # We merge the LLM's parsed priority/severity into the observation
+        obs['llm_priority'] = llm_parsed.get('priority', 1)
+        obs['llm_severity'] = llm_parsed.get('severity', 1)
+    return obs
+
 def main():
     client = OpenAI(api_key=API_KEY, base_url=API_BASE_URL)
     env = CivicDeskEnvironment()
