@@ -35,7 +35,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from ticket_bank import TICKET_BANK, get_ticket_by_id, get_tickets_by_difficulty
 from server.civic_desk_environment import CivicDeskEnvironment
 
-# ─── Page Config ──────────────────────────────────────────────────────
+# Page Config 
 st.set_page_config(
     page_title="Civic Desk — AI Benchmarking Dashboard",
     page_icon="🏛️",
@@ -43,136 +43,131 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# ─── Custom CSS ───────────────────────────────────────────────────────
+# Custom CSS - Tactical Luminance & Glassmorphism
 st.markdown("""
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Manrope:wght@400;600&display=swap');
 
     html, body, [class*="css"] {
-        font-family: 'Inter', sans-serif;
+        font-family: 'Manrope', sans-serif;
+        background-color: #0E0E0F !important;
+        color: #E5E2E3 !important;
+    }
+
+    [data-testid="stAppViewContainer"] {
+        background: radial-gradient(circle at top, rgba(35,35,45,1) 0%, rgba(14,14,15,1) 100%);
     }
 
     .main .block-container {
         padding-top: 2rem;
-        padding-bottom: 2rem;
+        padding-bottom: 3rem;
     }
 
-    /* KPI Cards */
+    /* KPI Cards - Glassmorphic */
     .kpi-card {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        border-radius: 16px;
+        background: rgba(42, 42, 43, 0.4);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
         padding: 1.5rem;
-        color: white;
         text-align: center;
-        box-shadow: 0 8px 32px rgba(102, 126, 234, 0.25);
-        transition: transform 0.2s ease;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
     }
     .kpi-card:hover {
-        transform: translateY(-4px);
+        transform: translateY(-2px);
+        border-color: rgba(255, 255, 255, 0.15);
     }
     .kpi-card h2 {
-        font-size: 2.4rem;
-        font-weight: 800;
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 2.6rem;
+        font-weight: 700;
         margin: 0;
         line-height: 1.1;
     }
     .kpi-card p {
         font-size: 0.85rem;
-        opacity: 0.85;
-        margin: 0.3rem 0 0;
+        color: #A3A3A3;
+        margin: 0.5rem 0 0;
         text-transform: uppercase;
-        letter-spacing: 0.08em;
+        letter-spacing: 0.1em;
     }
 
-    .kpi-green {
-        background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-        box-shadow: 0 8px 32px rgba(17, 153, 142, 0.25);
+    /* Neon Accents for KPIs */
+    .kpi-green h2 {
+        background: linear-gradient(90deg, #53E16F, #00A741);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
     }
-    .kpi-orange {
-        background: linear-gradient(135deg, #f2994a 0%, #f2c94c 100%);
-        box-shadow: 0 8px 32px rgba(242, 153, 74, 0.25);
+    .kpi-orange h2 {
+        background: linear-gradient(90deg, #FFB4AA, #FF5545);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
     }
-    .kpi-blue {
-        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-        box-shadow: 0 8px 32px rgba(79, 172, 254, 0.25);
+    .kpi-blue h2 {
+        background: linear-gradient(90deg, #ADC6FF, #4B8EFF);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
     }
 
     /* Hero header */
     .hero {
         text-align: center;
-        padding: 1rem 0 0.5rem;
+        padding: 2rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        margin-bottom: 2rem;
     }
     .hero h1 {
-        font-size: 2.2rem;
-        font-weight: 800;
-        background: linear-gradient(135deg, #667eea, #764ba2);
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 3.5rem;
+        font-weight: 700;
+        background: linear-gradient(135deg, #ADC6FF 0%, #FFB4AA 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        margin-bottom: 0.3rem;
+        margin-bottom: 0.5rem;
+        letter-spacing: -1px;
     }
     .hero .tagline {
-        font-size: 1rem;
-        color: #888;
-    }
-
-    /* Ticket card */
-    .ticket-card {
-        background: #1a1a2e;
-        border-radius: 12px;
-        padding: 1.2rem 1.5rem;
-        border-left: 4px solid #667eea;
-        margin: 0.5rem 0;
-        color: #e0e0e0;
-    }
-    .ticket-card .label {
-        font-size: 0.75rem;
-        color: #888;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        margin-bottom: 0.2rem;
-    }
-    .ticket-card .value {
-        font-size: 0.95rem;
-        margin-bottom: 0.8rem;
-        line-height: 1.4;
-    }
-
-    /* Status pill */
-    .pill-pass {
-        display: inline-block;
-        background: #38ef7d;
-        color: #000;
-        padding: 4px 14px;
-        border-radius: 20px;
-        font-weight: 700;
-        font-size: 0.85rem;
-    }
-    .pill-fail {
-        display: inline-block;
-        background: #ff6b6b;
-        color: #fff;
-        padding: 4px 14px;
-        border-radius: 20px;
-        font-weight: 700;
-        font-size: 0.85rem;
+        font-size: 1.1rem;
+        color: #A3A3A3;
+        font-weight: 400;
+        letter-spacing: 1px;
     }
 
     div[data-testid="stSidebar"] {
-        background: linear-gradient(180deg, #0f0c29 0%, #1a1a2e 100%);
+        background-color: #131314 !important;
+        border-right: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    /* Primary buttons */
+    div.stButton > button:first-child {
+        background: linear-gradient(90deg, #FFB4AA, #FF5545);
+        color: #131314;
+        font-family: 'Space Grotesk', sans-serif;
+        font-weight: 700;
+        border: none;
+        border-radius: 8px;
+        padding: 0.75rem 2rem;
+        transition: all 0.3s ease;
+    }
+    div.stButton > button:first-child:hover {
+        box-shadow: 0 0 20px rgba(255, 85, 69, 0.4);
+        transform: scale(1.02);
     }
 </style>
 """, unsafe_allow_html=True)
 
 
-# ─── Hero ─────────────────────────────────────────────────────────────
+# Hero 
 st.markdown("""
 <div class="hero">
-    <h1>🏛️ Civic Desk</h1>
-    <div class="tagline">AI-Powered Civic Service Benchmarking Platform</div>
+    <h1>Civic Desk Command</h1>
+    <div class="tagline">HETEROGENEOUS NEURAL DISPATCH // RL + LLM PERCEPTION</div>
 </div>
 """, unsafe_allow_html=True)
 
-# ─── Sidebar ──────────────────────────────────────────────────────────
+# Sidebar 
 with st.sidebar:
     st.markdown("### 🧭 Navigation")
     panel = st.radio(
@@ -220,7 +215,14 @@ def render_live_demo():
                     queue_str = list(QUEUE_MAP.keys())[raw_target]
                     diff_str = list(DIFF_MAP.keys())[env.active_ticket['difficulty']]
                     
-                    st.info(f"**🎫 Ticket Arrived:** (Internal Target: {queue_str})" )
+                    ticket_data = get_ticket_by_id(env.active_ticket['ticket_id'])
+                    desc = ticket_data['description'] if ticket_data else "Unknown anomaly detected."
+                    
+                    if "[TRANSCRIBED AUDIO]" in desc:
+                        st.markdown(f"**🎙️ 911 Audio Transcribed by Whisper-v3:**")
+                        st.warning(f"_{desc.replace('[TRANSCRIBED AUDIO]', '').strip()}_")
+                    else:
+                        st.info(f"**🎫 text_input_event:** {desc}")
                     
                     # Mocking perception for speed visually in UI
                     llm_parsed = {
@@ -292,9 +294,8 @@ def render_architecture():
         """)
         st.info("The RL loop learns dynamic capacity planning entirely locally through PPO generated rollouts, overcoming LLM limitations on multi-step reasoning.")
 
-# ═══════════════════════════════════════════════════════════════════════
-#  PANEL 0 — ABOUT PROJECT
-# ═══════════════════════════════════════════════════════════════════════
+
+#  ABOUT 
 if panel == "ℹ️ About Project":
     st.header("✨ Civic Desk Platform Overview")
     st.markdown("### What does this project do?")
@@ -319,15 +320,11 @@ if panel == "ℹ️ About Project":
     
     st.info("💡 **Hackathon Key Feature**: By decoupling LLM Perception from RL Training, our `train_rl.py` script trains massive policies over 15,000 steps locally in seconds, completely bypassing standard LLM API bottlenecks.")
 
-# ═══════════════════════════════════════════════════════════════════════
-#  PANEL 1 — LIVE DEMO
-# ═══════════════════════════════════════════════════════════════════════
+#  LIVE DEMO
 elif panel == "🎮 Live Demo":
     render_live_demo()
 
-# ═══════════════════════════════════════════════════════════════════════
-#  PANEL 2 — BENCHMARK RESULTS
-# ═══════════════════════════════════════════════════════════════════════
+#  BENCHMARK RESULTS
 elif panel == "📊 Benchmark Results":
     st.markdown("## 📊 Benchmark Results")
 
@@ -346,7 +343,7 @@ elif panel == "📊 Benchmark Results":
     summary = data["summary"]
     results = data["results"]
 
-    # ── KPI Cards ─────────────────────────────────────────────────────
+    #  KPI Cards 
     k1, k2, k3, k4 = st.columns(4)
     with k1:
         st.markdown(f"""
@@ -375,7 +372,7 @@ elif panel == "📊 Benchmark Results":
 
     st.markdown("<br>", unsafe_allow_html=True)
 
-    # ── Charts ────────────────────────────────────────────────────────
+    #  Charts 
     col_chart, col_radar = st.columns(2)
 
     with col_chart:
@@ -435,7 +432,7 @@ elif panel == "📊 Benchmark Results":
         )
         st.plotly_chart(fig2, use_container_width=True)
 
-    # ── Results Table ─────────────────────────────────────────────────
+    #  Results Table 
     st.markdown("### Full Results Table")
     df = pd.DataFrame(results)
     display_cols = [
@@ -456,17 +453,14 @@ elif panel == "📊 Benchmark Results":
     )
 
 
-# ═══════════════════════════════════════════════════════════════════════
-#  PANEL 3 — ARCHITECTURE
-# ═══════════════════════════════════════════════════════════════════════
+#  ARCHITECTURE
 elif panel == "🏗️ Architecture":
     st.markdown("## 🏗️ System Architecture")
     st.markdown(
         "The Civic Desk platform follows a **Reset → Observe → Act → Grade → Learn** "
         "reinforcement-learning loop."
     )
-
-    # Mermaid diagram rendered via st.markdown (Streamlit supports mermaid)
+    
     st.markdown("""
 ```mermaid
 graph LR

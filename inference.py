@@ -55,6 +55,8 @@ def main():
 
         # Run 3 steps per task
         while not done and step <= 3:
+            action_str = "null"
+            error = "null"
             try:
                 # Dummy LLM call
                 response = client.chat.completions.create(

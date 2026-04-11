@@ -526,7 +526,7 @@ _HARD: List[Dict[str, Any]] = [
 _AMBIGUOUS: List[Dict[str, Any]] = [
     {
         "ticket_id": "TKT-401",
-        "description": "Something is leaking on the road near my house.",
+        "description": "[TRANSCRIBED AUDIO] (Heavy breathing)... yeah, something is leaking on the road near my house... it smells weird, hurry up.",
         "policy_snippet": "Unidentified leaks could be water, sewer, or vehicle fluid — request more info before routing.",
         "active_resources": "General inspection unit available.",
         "difficulty_level": "ambiguous",
@@ -559,7 +559,7 @@ _AMBIGUOUS: List[Dict[str, Any]] = [
     },
     {
         "ticket_id": "TKT-404",
-        "description": "Kids are doing something dangerous at the intersection.",
+        "description": "[TRANSCRIBED AUDIO] Oh my god... kids are doing something dangerous at the intersection, cars are swerving!",
         "policy_snippet": "Vague safety calls at intersections need clarification: nature of activity, number of people, and if traffic is affected.",
         "active_resources": "Community patrol available.",
         "difficulty_level": "ambiguous",
@@ -603,7 +603,7 @@ _AMBIGUOUS: List[Dict[str, Any]] = [
     },
     {
         "ticket_id": "TKT-408",
-        "description": "I think I heard gunshots but it might have been fireworks near the community center.",
+        "description": "[TRANSCRIBED AUDIO] *Pop pop*... hello? I think I heard gunshots... but it might have been fireworks near the community center... please send someone.",
         "policy_snippet": "Possible gunfire reports require immediate Police dispatch regardless of uncertainty — officer determines on scene.",
         "active_resources": "Patrol units available in the area.",
         "difficulty_level": "ambiguous",
