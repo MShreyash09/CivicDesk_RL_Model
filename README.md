@@ -58,7 +58,7 @@ graph TD
 ```
 
 ## 📈 Scalability & Impact
-Civic Desk isn't just an RL wrapper. It demonstrates **Agentic Resilience**. By decoupling natural language understanding from mathematical constraint-solving, this setup can securely scale to manage automated EMS dispatch, public transit scheduling, or electrical grid load-balancing—representing the true end-state of enterprise AI.
+Civic Desk isn't just an RL wrapper. It demonstrates **Agentic Resilience**. By decoupling natural language understanding from mathematical constraint-solving, this setup securely scale to manage automated EMS dispatch, public transit scheduling, or electrical grid load-balancing—representing the true end-state of enterprise AI.
 
 ---
 <div align="center">
