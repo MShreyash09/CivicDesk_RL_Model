@@ -7,7 +7,7 @@
 
 ![City Command Center](https://raw.githubusercontent.com/MShreyash09/CivicDesk_RL_Model/main/assets/civic_desk_hero.png)
 
-Welcome to **Civic Desk** — an advanced, production-grade municipal dispatch simulator. This platform solves the reliability gap in purely generative AI by employing a **Heterogeneous Reinforcement Learning Architecture**, blending the unparalleled reasoning of Large Language Models (LLMs) with the strict, mathematical capacity-planning capabilities of Proximal Policy Optimization (PPO) RL agents.
+Welcome to **Civic Desk** — an advanced, production-grade municipal dispatch simulator. This platform solves the reliability gap in purely generative AI by employing a **Heterogeneous Reinforcement Learning Architecture**, blending the unparalleled reasoning of Large Language Models (LLMs) with the strict, mathematical capacity-planning capabilities of Proximal Policy Optimization (PPO) RL agents. 2026
 
 ## ✨ The Problem & Our Solution
 Generative AI acts as a brilliant "Perception" layer, decoding messy human context from calls or texts. However, LLMs hallucinate over multi-step timelines; they fail to remember that assigning a Water truck to a medium priority leak leaves the city vulnerable to critical main breaks hours later.
