@@ -3,7 +3,7 @@
 </div>
 
 # 🏛️ Civic Desk: Multi-Modal Agentic Dispatch
-> **Next-Generation Heterogeneous Reinforcement Learning for Municipal Operations**
+> **Next-Generation Heterogeneous Reinforcement Learning for Municipal daily task Operations**
 
 ![City Command Center](https://raw.githubusercontent.com/MShreyash09/CivicDesk_RL_Model/main/assets/civic_desk_hero.png)
 
